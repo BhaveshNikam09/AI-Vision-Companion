@@ -1,0 +1,17 @@
+# Web framework to build the API
+fastapi==0.111.0
+
+# ASGI server to run FastAPI
+uvicorn[standard]==0.29.0
+
+# To load API keys from the .env file
+python-dotenv==1.0.1
+
+# Required by FastAPI for handling file uploads
+python-multipart==0.0.9
+
+# Google's official library for the Gemini API
+google-generativeai
+
+# For handling and processing images
+Pillow

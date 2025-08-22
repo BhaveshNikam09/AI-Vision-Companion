@@ -1,0 +1,84 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+h2 {
+    margin-top: 0;
+    color: #1a1a1a;
+}
+
+p {
+    color: #555;
+    line-height: 1.6;
+}
+
+#imageInput {
+    display: block;
+    margin: 1.5rem auto;
+}
+
+#processButton {
+    background-color: #2a65ea;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#processButton:hover {
+    background-color: #1e4bcd;
+}
+
+#processButton:active {
+    transform: scale(0.98);
+}
+
+#processButton:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+.status {
+    margin-top: 1.5rem;
+    font-weight: 500;
+    height: 20px;
+}
+
+#resultBox {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: left;
+}
+
+#resultBox.hidden {
+    display: none;
+}
+
+#audioPlayback {
+    width: 100%;
+    margin-top: 0.5rem;
+}

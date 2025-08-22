@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Vision Companion</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>AI Vision Companion</h2>
+        <p>Select an image, and I will describe it out loud for you.</p>
+
+        <input type="file" id="imageInput" accept="image/*">
+        <button id="processButton">Describe & Speak</button>
+        
+        <p id="status" class="status"></p>
+        
+        <div id="resultBox" class="hidden">
+            <p><strong>Description:</strong></p>
+            <p id="descriptionResult"></p>
+            <p><strong>Murf Audio:</strong></p>
+            <audio id="audioPlayback" controls></audio>
+        </div>
+    </div>
+
+    <script src="static/vision_script.js"></script>
+</body>
+</html>
