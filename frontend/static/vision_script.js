@@ -5,29 +5,28 @@ const statusElement = document.getElementById("status");
 const resultBox = document.getElementById("resultBox");
 const descriptionResult = document.getElementById("descriptionResult");
 const audioPlayback = document.getElementById("audioPlayback");
+const replayButton = document.getElementById("replayButton"); // New replay button
 
 // The URL of your FastAPI backend
 const API_ENDPOINT = "http://127.0.0.1:8000/describe-and-speak";
 
-// Listen for clicks on the button
+// Listen for clicks on the main process button
 processButton.addEventListener("click", async () => {
-    // 1. Get the file from the input
     const file = imageInput.files[0];
     if (!file) {
         alert("Please select an image file first.");
         return;
     }
 
-    // 2. Update UI to show "processing" state
-    statusElement.textContent = "Processing... This may take a moment.";
-    resultBox.classList.add("hidden"); // Hide previous results
+    // --- Better Loading State ---
+    statusElement.textContent = "Uploading and analyzing image...";
+    resultBox.classList.add("hidden"); 
+    replayButton.classList.add("hidden"); // Hide replay button during new request
     processButton.disabled = true;
 
-    // 3. Create FormData and add the file to it
     const formData = new FormData();
     formData.append("file", file);
 
-    // 4. Call the backend API
     try {
         const response = await fetch(API_ENDPOINT, {
             method: "POST",
@@ -37,24 +36,30 @@ processButton.addEventListener("click", async () => {
         const data = await response.json();
 
         if (!response.ok) {
-            // If the server returns an error, display it
             throw new Error(data.detail || "An unknown error occurred on the server.");
         }
         
-        // 5. Success! Update the UI with the results
+        // --- Success! Update the UI ---
         descriptionResult.textContent = data.description;
         audioPlayback.src = data.audioUrl;
         audioPlayback.play();
         
         statusElement.textContent = "Done!";
-        resultBox.classList.remove("hidden"); // Show the result box
+        resultBox.classList.remove("hidden");
+        replayButton.classList.remove("hidden"); // Show the replay button
 
     } catch (error) {
-        // 6. Handle any errors during the fetch
         console.error("Error during API call:", error);
         statusElement.textContent = `Error: ${error.message}`;
     } finally {
-        // 7. Re-enable the button after the process is finished
         processButton.disabled = false;
+    }
+});
+
+// --- Add event listener for the new Replay Button ---
+replayButton.addEventListener('click', () => {
+    if (audioPlayback.src) {
+        audioPlayback.currentTime = 0; // Rewind to the start
+        audioPlayback.play();
     }
 });
